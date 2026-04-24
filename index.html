@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase I — Reopen the Movement</title>
+<!-- Mrs Eaves via Adobe Fonts (Typekit) — requires an active Adobe Fonts subscription.
+     Add your project kit ID: replace 'XXXXXXX' with your kit ID from fonts.adobe.com -->
+<link rel="stylesheet" href="https://use.typekit.net/XXXXXXX.css">
+<style>
+  /* Mrs Eaves OT — crisp rendering via font-smoothing + subpixel settings.
+     Adobe Fonts kit should include: mrs-eaves (regular, italic, bold) and
+     mrs-eaves-xl-serif (for large display / OT alternates if available).
+     Fallback stack mirrors Mrs Eaves' old-style bracketed serif character. */
+  @font-face {
+    /* Fallback: this block is a no-op when the kit loads successfully */
+    font-family: 'mrs-eaves';
+    src: local('Georgia');
+    font-weight: 400;
+    font-style: normal;
+    unicode-range: U+0000-00FF;
+  }
+</style>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --white: #ffffff;
+  --black: #0a0a0a;
+  --gray-100: #f5f5f5;
+  --gray-200: #e8e8e8;
+  --gray-400: #aaaaaa;
+  --gray-600: #666666;
+  --red: #c0392b;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: 'mrs-eaves', Georgia, serif;
+  overflow-x: hidden;
+  /* Crisp Mrs Eaves rendering — subpixel AA for print-like sharpness */
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1, "onum" 1, "swsh" 1;
+}
+
+/* Mrs Eaves XL Serif — used for display/headline sizes; force crisp at large scale */
+h1, h2, .drill-num, .bc-value, .ms-text, .ms-arrow, .intro-ghost {
+  font-feature-settings: "kern" 1, "liga" 1, "swsh" 1, "calt" 1;
+  -webkit-font-smoothing: subpixel-antialiased;
+  text-rendering: geometricPrecision;
+}
+
+/* ── MASTHEAD ── */
+.masthead {
+  padding: 3rem 5rem 0;
+  border-bottom: 1px solid var(--black);
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.5s ease forwards;
+}
+
+.masthead-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.eyebrow {
+  font-family: 'mrs-eaves', Georgia, serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gray-600);
+}
+
+.dateline {
+  font-family: 'mrs-eaves', Georgia, serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  padding: 1.5rem 0 0;
+  gap: 2rem;
+}
+
+.hero-text { position: relative; }
+
+h1 {
+  font-family: 'mrs-eaves-xl-serif', Georgia, serif;
+  font-size: clamp(26px, 4vw, 52px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.08;
+  color: var(--black);
+  max-width: 440px;
+  padding-bottom: 2rem;
+}
+
+.hero-meta {
+  text-align: right;
+  padding-bottom: 2rem;
+}
+
+.meta-stack { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.meta-label {
+  font-family: 'mrs-eaves', Georgia, serif;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.meta-value {
+  font-family: 'mrs-eaves', Georgia, serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--black);
+  display: block;
+}
+
+/* ── INTRO STRIP ── */
+.intro-strip {
+  background: transparent;
+  color: var(--black);
+  padding: 3rem 5rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  border-bottom: 1px solid var(--gray-200);
+  opacity: 0;
+  animation: fadeUp 0.5s ease 0.08s forwards;
+}
+
+.intro-ghost {
+  font-family: 'mrs-eaves-xl-serif', Georgia, serif;
+  font-size: 72px;
+  line-height: 1;
+  color: var(--gray-200);
+  opacity: 1;
+  font-style: italic;
+  user-select: none;
+  letter-spacing: -0.02em;
+}
+
+.intro-text {
+  font-family: 'mrs-eaves', Georgia, serif;
+  font-size: clamp(14px, 1.4vw, 16px);
+  font-style: italic;
+  line-height: 1.85;
+  color: var(--gray-600);
+  font-weight: 400;
+}
+
+.intro-text strong {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--gray-600);
+}
+
+/* ── FOCUS ROW ── */
+.focus-row {
+  padding: 1.25rem 5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--gray-200);
+  opacity: 0;
+  animation: fadeUp 0.5s ease 0.12s forwards;
+}
+
+.focus-label {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+}
+
+.tag {
+  font-family: 'mrs-eaves', Georgia, serif;
+  font-size: 13px;
+  font-style: italic;
+  padding: 3px 14px;
+  border: 1px solid var(--gray-200);
+  color: var(--gray-600);
+}
+
+/* ── DRILLS ── */
+.drills { padding: 0 5rem 0; }
+
+.section-rule {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2.5rem 0 2rem;
+}
+
+.section-rule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--gray-200);
+}
+
+.section-rule span {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  white-space: nowrap;
+}
+
+/* ── DRILL CARD ── */
+.drill {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  border-top: 1px solid var(--black);
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.drill:nth-child(1) { animation-delay: 0.1s; }
+.drill:nth-child(2) { animation-delay: 0.2s; }
+.drill:nth-child(3) { animation-delay: 0.3s; }
+.drill:nth-child(4) { animation-delay: 0.4s; }
+
+.drill-left {
+  border-right: 1px solid var(--gray-200);
+  padding: 2.5rem 2rem 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.drill-num {
+  font-family: 'mrs-eaves-xl-serif', Georgia, serif;
+  font-size: clamp(96px, 12vw, 152px);
+  line-height: 0.85;
+  color: var(--white);
+  -webkit-text-stroke: 1px var(--black);
+  text-stroke: 1px var(--black);
+  letter-spacing: -0.03em;
+  transition: color 0.3s ease, -webkit-text-stroke 0.3s ease;
+  user-select: none;
+}
+
+.drill:hover .drill-num {
+  color: var(--black);
+  -webkit-text-stroke: 0px;
+}
+
+.drill-reps {
+  font-family: 'mrs-eaves', Georgia, serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-top: 1rem;
+}
+
+.drill-right {
+  padding: 2.5rem 0 2.5rem 3rem;
+}
+
+.drill-name {
+  font-family: 'mrs-eaves-xl-serif', Georgia, serif;
+  font-size: clamp(24px, 3.2vw, 42px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.05;
+  color: var(--black);
+  margin-bottom: 1.5rem;
+}
+
+.drill-desc {
+  font-family: 'mrs-eaves', Georgia, serif;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.82;
+  color: #222;
+  max-width: 600px;
+  margin-bottom: 1.75rem;
+}
+
+.drill-desc em { font-style: italic; }
+
+/* ── ILLUSTRATION ── */
+.illus {
+  margin: 0 0 1.75rem;
+  border-top: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 1.5rem 0;
+}
+
+.illus svg { display: block; width: 100%; height: auto; }
+
+/* ── RELEVANCE ── */
+.relevance {
+  font-family: 'mrs-eaves', Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  color: var(--gray-600);
+  line-height: 1.68;
+  max-width: 560px;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--black);
+}
+
+.relevance strong { font-style: normal; font-weight: 600; color: var(--black); }
+
+/* ── BOTTOM GRID ── */
+.bottom-grid {
+  margin: 0 5rem;
+  border-top: 1px solid var(--black);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.bottom-cell {
+  padding: 2.5rem 2.5rem 2.5rem 0;
+  border-right: 1px solid var(--gray-200);
+}
+
+.bottom-cell:last-child {
+  border-right: none;
+  padding-left: 2.5rem;
+  padding-right: 0;
+}
+
+.bc-label {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.bc-value {
+  font-family: 'mrs-eaves-xl-serif', Georgia, serif;
+  font-size: clamp(20px, 2.6vw, 34px);
+  font-style: italic;
+  line-height: 1.15;
+  color: var(--black);
+  margin-bottom: 0.75rem;
+}
+
+.bc-sub {
+  font-family: 'mrs-eaves', Georgia, serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--gray-600);
+}
+
+/* ── MILESTONE ── */
+.milestone {
+  margin: 0 5rem;
+  border-top: 1px solid var(--black);
+  border-bottom: 1px solid var(--black);
+  padding: 2.5rem 0;
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+}
+
+.ms-arrow {
+  font-family: 'mrs-eaves-xl-serif', Georgia, serif;
+  font-size: 48px;
+  color: var(--red);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.ms-label {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.ms-text {
+  font-family: 'mrs-eaves-xl-serif', Georgia, serif;
+  font-size: clamp(19px, 2.4vw, 28px);
+  font-style: italic;
+  color: var(--black);
+  line-height: 1.25;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 2rem 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-left {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+}
+
+.phase-pips { display: flex; gap: 6px; align-items: center; }
+.pip { width: 20px; height: 1px; background: var(--gray-200); }
+.pip.active { background: var(--black); width: 32px; }
+
+/* ── PICTOGRAMS ── */
+.illus-picto {
+  margin: 0 0 1.75rem;
+  border-top: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+.illus-picto img {
+  display: block;
+  height: 140px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.92;
+  mix-blend-mode: multiply;
+}
+.illus-picto .picto-sep {
+  font-family: 'mrs-eaves-xl-serif', Georgia, serif;
+  font-size: 28px;
+  font-style: italic;
+  color: var(--gray-400);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+
+/* ── SEQUENCE FLOW ── */
+.seq-flow {
+  margin: 0 0 1.75rem;
+  border-top: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 2rem 0 1.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  overflow: visible;
+}
+
+.seq-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.seq-step .verb {
+  font-family: 'mrs-eaves-xl-serif', Georgia, serif;
+  font-size: 17px;
+  font-style: italic;
+  color: var(--black);
+  opacity: 0.85;
+  line-height: 1;
+  margin-bottom: 5px;
+  white-space: nowrap;
+}
+
+.seq-step.accent .verb {
+  color: var(--red);
+  opacity: 1;
+}
+
+.seq-step .noun {
+  font-family: 'mrs-eaves', Georgia, serif;
+  font-size: 8.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  white-space: nowrap;
+}
+
+.seq-step.accent .noun {
+  color: var(--red);
+  opacity: 0.75;
+}
+
+.seq-arrow {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  margin-top: 4px; /* align with verb baseline */
+  flex-shrink: 0;
+}
+
+.seq-arrow svg {
+  width: 38px;
+  height: 12px;
+  overflow: visible;
+}
+
+.seq-tail {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding-left: 2rem;
+}
+
+.seq-tail .repeat {
+  font-family: 'mrs-eaves-xl-serif', Georgia, serif;
+  font-size: 24px;
+  font-style: italic;
+  color: var(--red);
+  opacity: 0.4;
+  line-height: 1;
+}
+
+.seq-caption {
+  width: 100%;
+  text-align: center;
+  font-family: 'mrs-eaves', Georgia, serif;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--gray-400);
+  margin-top: 1.25rem;
+  padding-top: 0;
+  letter-spacing: 0.02em;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .masthead, .drills, .intro-strip, .focus-row { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .bottom-grid, .milestone, footer { margin-left: 1.5rem; margin-right: 1.5rem; }
+  .intro-strip { grid-template-columns: 1fr; gap: 0; }
+  .intro-ghost { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-meta { text-align: left; }
+  .meta-stack { flex-direction: row; flex-wrap: wrap; gap: 1rem; }
+  .drill { grid-template-columns: 90px 1fr; }
+  .drill-num { font-size: 68px; }
+  .drill-right { padding-left: 1.25rem; }
+  .bottom-grid { grid-template-columns: 1fr; }
+  .bottom-cell { border-right: none; padding-left: 0; border-bottom: 1px solid var(--gray-200); }
+  .bottom-cell:last-child { border-bottom: none; }
+  .masthead-top { flex-direction: column; gap: 0.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-top">
+    <span class="eyebrow">Pop-Up Progression Plan</span>
+    <span class="dateline">Weeks I–II &nbsp;·&nbsp; Land Work Only</span>
+  </div>
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Reopen<br>the Movement</h1>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-stack">
+        <div><span class="meta-label">Duration</span><span class="meta-value">Weeks 1–2</span></div>
+        <div><span class="meta-label">Daily time</span><span class="meta-value">&lt; 15 min</span></div>
+        <div><span class="meta-label">Frequency</span><span class="meta-value">Every day</span></div>
+        <div><span class="meta-label">Equipment</span><span class="meta-value">None</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- INTRO -->
+<div class="intro-strip">
+  <div class="intro-ghost" aria-hidden="true">I</div>
+  <p class="intro-text">The goal here isn't effort — it's <strong>reopening range that's been sitting dormant.</strong> Think of it as physical archaeology: you're not building something new, you're uncovering what's already there. Never force range. Ease in, breathe, and let the stretch happen.</p>
+</div>
+
+<!-- FOCUS -->
+<div class="focus-row">
+  <span class="focus-label">Focus</span>
+  <span class="tag">Flexibility</span>
+  <span class="tag">Body Awareness</span>
+</div>
+
+<!-- DRILLS -->
+<section class="drills">
+  <div class="section-rule"><span>The Four Drills</span></div>
+
+  <!-- ── DRILL 01 ── -->
+  <div class="drill">
+    <div class="drill-left">
+      <div class="drill-num" aria-hidden="true">01</div>
+      <div class="drill-reps">10 reps &nbsp;·&nbsp; slow</div>
+    </div>
+    <div class="drill-right">
+      <h2 class="drill-name">Cobra to<br>Downward Dog</h2>
+      <p class="drill-desc">
+        Lie face-down, hands flat directly under your shoulders — not beside your head. Press up slowly into cobra: pelvis stays on the floor, elbows soft, chest lifts. Hold 2 seconds and feel the thoracic extension, not just your lower back arching. Then tuck toes, push hips up and back into downward dog — heels reaching toward the floor. Hold 2 seconds. <em>The transition between the two positions is the work.</em> Do it in slow motion and you'll feel exactly where you're restricted.
+      </p>
+
+                  <div class="seq-flow" aria-label="Cobra to Downward Dog movement sequence">
+        <div class="seq-step"><span class="verb">Lie</span><span class="noun">face down</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step"><span class="verb">Press</span><span class="noun">hands</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step"><span class="verb">Lift</span><span class="noun">chest — cobra</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step"><span class="verb">Tuck</span><span class="noun">toes</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step"><span class="verb">Push</span><span class="noun">hips up</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step accent"><span class="verb">Reach</span><span class="noun">heels — down dog</span></div>
+        <div class="seq-tail"><span class="repeat">×10</span></div>
+      </div>
+      <p class="seq-caption">slow — hold 2 sec in each position · the transition is the work</p>
+      <p class="relevance">
+        <strong>On the board:</strong> The cobra position is the chest-press phase of your pop-up. If your thoracic spine is locked up, your hands never fully leave the board — they drag, which kills the timing of everything downstream.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── DRILL 02 ── -->
+  <div class="drill">
+    <div class="drill-left">
+      <div class="drill-num" aria-hidden="true">02</div>
+      <div class="drill-reps">60 sec &nbsp;·&nbsp; each side</div>
+    </div>
+    <div class="drill-right">
+      <h2 class="drill-name">Hip Flexor<br>Lunge Stretch</h2>
+      <p class="drill-desc">
+        Step one foot forward into a deep lunge, rear knee on the ground — use a folded towel if needed. Think about <em>sinking the hips forward and down</em>, not just bending the front knee. The stretch should be felt deep in the front of the rear hip. Raise arms overhead to deepen it. Hold 60 seconds each side — don't shortchange it, this tissue is dense and needs time. Breathe into the stretch throughout.
+      </p>
+
+                  <div class="seq-flow" aria-label="Hip flexor lunge movement sequence">
+        <div class="seq-step"><span class="verb">Step</span><span class="noun">foot forward</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step"><span class="verb">Lower</span><span class="noun">rear knee</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step"><span class="verb">Sink</span><span class="noun">hips — forward & down</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step"><span class="verb">Raise</span><span class="noun">arms overhead</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step accent"><span class="verb">Breathe</span><span class="noun">into the stretch</span></div>
+        <div class="seq-tail"><span class="repeat">60s</span></div>
+      </div>
+      <p class="seq-caption">each side · don't shortchange it — this tissue is dense</p>
+      <p class="relevance">
+        <strong>On the board:</strong> When your front foot lands in the pop-up, your hip flexors must be long enough to allow your hips to drop low and forward into your stance. Short hip flexors put your weight in the back seat — every time.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── DRILL 03 ── -->
+  <div class="drill">
+    <div class="drill-left">
+      <div class="drill-num" aria-hidden="true">03</div>
+      <div class="drill-reps">2 min &nbsp;·&nbsp; daily</div>
+    </div>
+    <div class="drill-right">
+      <h2 class="drill-name">Ankle Circles &amp;<br>Dorsiflexion</h2>
+      <p class="drill-desc">
+        Sit on the floor, legs extended. For circles: slow, full-range rotations — 10 each direction per ankle. For dorsiflexion: loop a towel around the ball of your foot, pull toes toward your shin, hold 3–4 seconds, release. Wall version: face a wall, toes 2–3 inches from the baseboard, try to touch your knee to the wall without your heel lifting. That gap tells you exactly where you are.
+      </p>
+
+                  <div class="seq-flow" aria-label="Ankle circles and dorsiflexion sequence">
+        <div class="seq-step"><span class="verb">Lift</span><span class="noun">foot off floor</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step"><span class="verb">Circle</span><span class="noun">full range</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step"><span class="verb">Reverse</span><span class="noun">direction</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step"><span class="verb">Flex</span><span class="noun">toes toward shin</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step"><span class="verb">Point</span><span class="noun">toes down</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step accent"><span class="verb">Load</span><span class="noun">weight forward</span></div>
+        <div class="seq-tail"><span class="repeat">×10</span></div>
+      </div>
+      <p class="seq-caption">each foot · slow circles — feel where range drops off</p>
+      <p class="relevance">
+        <strong>On the board:</strong> When you land your front foot in the pop-up, your ankle must dorsiflex to get weight forward over the board. Stiff ankles push your weight back. Subtle — but it shows up on every single wave.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── DRILL 04 ── -->
+  <div class="drill">
+    <div class="drill-left">
+      <div class="drill-num" aria-hidden="true">04</div>
+      <div class="drill-reps">5 min &nbsp;·&nbsp; eyes closed</div>
+    </div>
+    <div class="drill-right">
+      <h2 class="drill-name">Pop-Up<br>Visualization</h2>
+      <p class="drill-desc">
+        Lie on your back, close your eyes, and mentally run through the full motion in real time at pop-up speed: feel the water under the board, hear the wave, feel your hands press, hips drive, front foot plant, hands release, eyes come up to the horizon. Run it 4–5 times per session. For it to work, it must be <em>specific and sensory</em> — not abstract. If you find yourself losing focus or rushing, slow down and rebuild the sensation from the beginning.
+      </p>
+
+                  <div class="seq-flow" aria-label="Pop-up visualization sequence">
+        <div class="seq-step"><span class="verb">Feel</span><span class="noun">water moving</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step"><span class="verb">Press</span><span class="noun">hands</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step"><span class="verb">Drive</span><span class="noun">hips</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step"><span class="verb">Plant</span><span class="noun">front foot</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step"><span class="verb">Release</span><span class="noun">hands</span></div>
+        <span class="seq-arrow"><svg viewBox="0 0 38 12" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="6" x2="30" y2="6" stroke="#aaaaaa" stroke-width="1" stroke-dasharray="4 3"/><path d="M26 2.5 L31 6 L26 9.5" stroke="#aaaaaa" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="seq-step accent"><span class="verb">Rise</span><span class="noun">eyes — horizon</span></div>
+        <div class="seq-tail"><span class="repeat">×5</span></div>
+      </div>
+      <p class="seq-caption">run it in real time — specific and sensory</p>
+      <p class="relevance">
+        <strong>The science:</strong> The brain fires the same motor patterns during vivid visualization as during physical execution. You already know this movement. These are free reps — and your nervous system can't tell the difference when done with full sensory detail.
+      </p>
+    </div>
+  </div>
+
+</section>
+
+<!-- BOTTOM GRID -->
+<div class="bottom-grid">
+  <div class="bottom-cell">
+    <span class="bc-label">Daily cadence</span>
+    <p class="bc-value">Under fifteen<br>minutes total</p>
+    <p class="bc-sub">These are mobility sessions, not workouts. Consistent gentle work beats aggressive sessions that leave you sore — every time.</p>
+  </div>
+  <div class="bottom-cell">
+    <span class="bc-label">The only rule</span>
+    <p class="bc-value"><em>Never</em> force<br>the range</p>
+    <p class="bc-sub">You're having a conversation with tissue that's been quiet for a while. Ease in, breathe, and let the stretch happen of its own accord.</p>
+  </div>
+</div>
+
+<!-- MILESTONE -->
+<div class="milestone">
+  <div class="ms-arrow" aria-hidden="true">→</div>
+  <div>
+    <span class="ms-label">Milestone — advance to Phase II when</span>
+    <p class="ms-text">You can hold a low lunge comfortably and cobra without any pinch in the lower back.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-left">Phase I &nbsp;·&nbsp; Pop-Up Progression &nbsp;·&nbsp; Land Work Only</span>
+  <div class="phase-pips" aria-label="Phase 1 of 4">
+    <div class="pip active"></div>
+    <div class="pip"></div>
+    <div class="pip"></div>
+    <div class="pip"></div>
+  </div>
+</footer>
+
+</body>
+</html>
