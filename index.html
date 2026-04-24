@@ -560,20 +560,154 @@ footer {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  .masthead, .drills, .intro-strip, .focus-row { padding-left: 1.5rem; padding-right: 1.5rem; }
-  .bottom-grid, .milestone, footer { margin-left: 1.5rem; margin-right: 1.5rem; }
-  .intro-strip { grid-template-columns: 1fr; gap: 0; }
+  /* ── Global gutters: 16px on every side ── */
+  .masthead          { padding-left: 16px; padding-right: 16px; padding-top: 2rem; }
+  .intro-strip       { padding-left: 16px; padding-right: 16px; }
+  .focus-row         { padding-left: 16px; padding-right: 16px; }
+  .drills            { padding-left: 16px; padding-right: 16px; }
+  .bottom-grid       { margin-left: 16px; margin-right: 16px; }
+  .milestone         { margin-left: 16px; margin-right: 16px; }
+  footer             { padding-left: 16px; padding-right: 16px; }
+
+  /* ── Masthead ── */
+  .masthead-top {
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-bottom: 1rem;
+  }
+
+  /* ── Hero: single column, left-aligned ── */
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 1.25rem 0 0;
+  }
+  h1 {
+    font-size: clamp(28px, 8vw, 42px);
+    max-width: 100%;
+    padding-bottom: 0;
+  }
+  .hero-meta { text-align: left; padding-bottom: 1.25rem; }
+  .meta-stack {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+  }
+  .meta-label { font-size: 8px; }
+  .meta-value { font-size: 15px; }
+
+  /* ── Intro strip: single column, no ghost ── */
+  .intro-strip {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
   .intro-ghost { display: none; }
-  .hero { grid-template-columns: 1fr; }
-  .hero-meta { text-align: left; }
-  .meta-stack { flex-direction: row; flex-wrap: wrap; gap: 1rem; }
-  .drill { grid-template-columns: 90px 1fr; }
-  .drill-num { font-size: 68px; }
-  .drill-right { padding-left: 1.25rem; }
+  .intro-text  { font-size: 15px; line-height: 1.75; }
+
+  /* ── Focus row ── */
+  .focus-row { gap: 0.75rem; flex-wrap: wrap; }
+
+  /* ── Drills: fully stacked, no side column ── */
+  .drill {
+    display: block; /* collapse grid entirely */
+    border-top: 1px solid var(--black);
+    padding: 1.75rem 0;
+  }
+
+  /* Left column becomes an inline header row */
+  .drill-left {
+    border-right: none;
+    padding: 0 0 1rem;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 1rem;
+    display: flex;
+  }
+
+  .drill-num {
+    font-size: 52px;
+    line-height: 1;
+    -webkit-text-stroke: 1px var(--black);
+  }
+
+  .drill-reps {
+    font-size: 9px;
+    margin-top: 0;
+  }
+
+  /* Right column: full width, no left padding */
+  .drill-right {
+    padding: 0;
+  }
+
+  .drill-name {
+    font-size: clamp(22px, 6.5vw, 32px);
+    margin-bottom: 1rem;
+  }
+
+  .drill-desc {
+    font-size: 15px;
+    line-height: 1.75;
+    max-width: 100%;
+    margin-bottom: 1.25rem;
+  }
+
+  /* ── Sequence flow: horizontal scroll ── */
+  .seq-flow {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 1.5rem 0 1.25rem;
+    gap: 0;
+    /* subtle scroll affordance */
+    scrollbar-width: none;
+  }
+  .seq-flow::-webkit-scrollbar { display: none; }
+
+  .seq-step .verb { font-size: 15px; }
+  .seq-step .noun { font-size: 8px; }
+
+  .seq-caption {
+    font-size: 11px;
+    margin-top: 0.75rem;
+  }
+
+  /* ── Relevance block ── */
+  .relevance {
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+  /* ── Bottom grid: stacked ── */
   .bottom-grid { grid-template-columns: 1fr; }
-  .bottom-cell { border-right: none; padding-left: 0; border-bottom: 1px solid var(--gray-200); }
-  .bottom-cell:last-child { border-bottom: none; }
-  .masthead-top { flex-direction: column; gap: 0.5rem; }
+  .bottom-cell {
+    border-right: none;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .bottom-cell:last-child {
+    border-bottom: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .bc-value { font-size: clamp(20px, 5.5vw, 28px); }
+
+  /* ── Milestone ── */
+  .milestone {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.75rem 0;
+  }
+  .ms-arrow { font-size: 36px; }
+  .ms-text  { font-size: clamp(17px, 4.5vw, 22px); }
+
+  /* ── Footer ── */
+  footer { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+
+  /* ── Section rule ── */
+  .section-rule { padding: 1.75rem 0 1.25rem; }
 }
 </style>
 </head>
