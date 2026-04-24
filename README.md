@@ -1,1 +1,1 @@
-# stretch
+The goal here isn't effort — it's reopening range that's been sitting dormant. Think of it as physical archaeology: you're not building something new, you're uncovering what's already there. Never force range. Ease in, breathe, and let the stretch happen.# stretch
